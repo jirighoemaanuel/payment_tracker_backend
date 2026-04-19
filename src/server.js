@@ -1,8 +1,8 @@
-import dotenv from "dotenv";
+import dotenv from 'dotenv';
 
-import app from "./app.js";
-import connectDB from "./config/db.js";
-import { startReminderCron } from "./services/reminderService.js";
+import app from './app.js';
+import connectDB from './config/db.js';
+import { startReminderCron } from './services/reminderService.js';
 
 dotenv.config();
 
@@ -18,7 +18,7 @@ const startServer = async () => {
 
     startReminderCron();
   } catch (error) {
-    console.error("Failed to start server:", error.message);
+    console.error('Failed to start server:', error.message);
     process.exit(1);
   }
 };

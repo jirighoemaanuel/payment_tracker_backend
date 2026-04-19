@@ -1,0 +1,11 @@
+meta {
+  name: Get Agreement Payment History
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{baseUrl}}/payments/agreement/{{agreementId}}
+  body: none
+  auth: none
+}

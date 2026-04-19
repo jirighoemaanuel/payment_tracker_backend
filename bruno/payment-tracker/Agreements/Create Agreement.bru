@@ -1,0 +1,31 @@
+meta {
+  name: Create Agreement
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/agreements
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "tenant": "{{tenantId}}",
+    "unit": "{{unitId}}",
+    "paymentType": "yearly",
+    "startDate": "2026-01-01",
+    "endDate": "2026-12-31",
+    "amountDue": 250000,
+    "status": "active",
+    "reminderSettings": {
+      "enabled": true,
+      "daysBeforeDue": 5
+    }
+  }
+}

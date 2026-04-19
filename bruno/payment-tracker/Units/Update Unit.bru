@@ -1,0 +1,22 @@
+meta {
+  name: Update Unit
+  type: http
+  seq: 4
+}
+
+put {
+  url: {{baseUrl}}/units/{{unitId}}
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "status": "occupied",
+    "description": "Now occupied"
+  }
+}

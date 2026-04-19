@@ -1,0 +1,25 @@
+meta {
+  name: Record Payment
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/payments
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "agreement": "{{agreementId}}",
+    "amount": 100000,
+    "paymentDate": "2026-04-19",
+    "paymentMethod": "bank-transfer",
+    "note": "First installment"
+  }
+}

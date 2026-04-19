@@ -1,0 +1,11 @@
+meta {
+  name: Delete Agreement
+  type: http
+  seq: 5
+}
+
+delete {
+  url: {{baseUrl}}/agreements/{{agreementId}}
+  body: none
+  auth: none
+}
