@@ -1,0 +1,36 @@
+{
+  "tenant": {
+    "fullName": "Ada Obi",
+    "phone": "+2348012345678",
+    "email": "ada@example.com",
+    "alternateName": "Ada N.",
+    "notes": "Prefers email reminders"
+  },
+  "unit": {
+    "name": "Block A - Room 4",
+    "category": "1 Bedroom",
+    "description": "Ground floor unit with prepaid meter",
+    "rentAmount": 250000,
+    "status": "available"
+  },
+  "agreement": {
+    "tenant": "TENANT_ID_HERE",
+    "unit": "UNIT_ID_HERE",
+    "paymentType": "yearly",
+    "startDate": "2026-01-01",
+    "endDate": "2026-12-31",
+    "amountDue": 250000,
+    "status": "active",
+    "reminderSettings": {
+      "enabled": true,
+      "daysBeforeDue": 5
+    }
+  },
+  "payment": {
+    "agreement": "AGREEMENT_ID_HERE",
+    "amount": 100000,
+    "paymentDate": "2026-04-19",
+    "paymentMethod": "bank-transfer",
+    "note": "First installment"
+  }
+}
