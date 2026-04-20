@@ -61,9 +61,8 @@ const agreementSchema = new mongoose.Schema(
   }
 );
 
-agreementSchema.pre("save", function updateOutstandingBalance(next) {
+agreementSchema.pre("save", function updateOutstandingBalance() {
   this.outstandingBalance = Math.max(this.amountDue - this.totalPaid, 0);
-  next();
 });
 
 const Agreement = mongoose.model("Agreement", agreementSchema);

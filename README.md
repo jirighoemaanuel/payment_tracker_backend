@@ -145,6 +145,8 @@ GET /api/v1/health
 ## Notes
 
 - Receipt emails are sent to `ADMIN_EMAIL`.
+- Each recorded payment now generates a PDF receipt from the official template in `assets/receipt-template.pdf`.
+- Generated receipt PDFs are saved in `uploads/receipts/`.
 - If SMTP settings are missing, Nodemailer falls back to a local JSON transport so the app still works for development.
 - The reminder cron job is a simple stub for now and runs every day at `08:00`.
 - Responses use the format below:

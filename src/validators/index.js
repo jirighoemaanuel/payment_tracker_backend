@@ -7,7 +7,10 @@ const tenantValidationRules = {
   create: [
     body("fullName").notEmpty().withMessage("fullName is required"),
     body("phone").notEmpty().withMessage("phone is required"),
-    body("email").isEmail().withMessage("email must be valid"),
+    body("email")
+      .optional({ values: "falsy" })
+      .isEmail()
+      .withMessage("email must be valid"),
     body("alternateName").optional().isString().withMessage("alternateName must be a string"),
     body("notes").optional().isString().withMessage("notes must be a string"),
   ],
@@ -15,7 +18,10 @@ const tenantValidationRules = {
     mongoIdValidationRule("id"),
     body("fullName").optional().notEmpty().withMessage("fullName cannot be empty"),
     body("phone").optional().notEmpty().withMessage("phone cannot be empty"),
-    body("email").optional().isEmail().withMessage("email must be valid"),
+    body("email")
+      .optional({ values: "falsy" })
+      .isEmail()
+      .withMessage("email must be valid"),
     body("alternateName").optional().isString().withMessage("alternateName must be a string"),
     body("notes").optional().isString().withMessage("notes must be a string"),
   ],

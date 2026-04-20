@@ -1,5 +1,6 @@
 import Receipt from "../models/Receipt.js";
 import generateReceiptNumber from "../utils/generateReceiptNumber.js";
+import generateReceiptPdf from "./pdfReceiptService.js";
 
 const createReceipt = async ({ payment, agreement }) => {
   const receipt = await Receipt.create({
@@ -9,6 +10,15 @@ const createReceipt = async ({ payment, agreement }) => {
     receiptNumber: generateReceiptNumber(),
     amount: payment.amount,
   });
+
+  const pdfFile = await generateReceiptPdf({
+    receipt,
+    agreement,
+    payment,
+  });
+
+  receipt.pdfPath = pdfFile.relativeFilePath;
+  await receipt.save();
 
   return Receipt.findById(receipt._id)
     .populate("payment")

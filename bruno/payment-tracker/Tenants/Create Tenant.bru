@@ -18,8 +18,11 @@ body:json {
   {
     "fullName": "Ada Obi",
     "phone": "+2348012345678",
-    "email": "ada@example.com",
     "alternateName": "Ada N.",
     "notes": "Prefers email reminders"
   }
+}
+
+vars:pre-request {
+  baseUrl: http://localhost:5000/api/v1
 }

@@ -1,6 +1,11 @@
 import nodemailer from "nodemailer";
+import path from "path";
+import { fileURLToPath } from "url";
 
 import Receipt from "../models/Receipt.js";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const createTransporter = () => {
   if (process.env.SMTP_HOST && process.env.SMTP_PORT) {
@@ -45,6 +50,14 @@ const sendReceiptToAdmin = async ({ receipt, agreement, payment }) => {
         `Payment Amount: ${payment.amount}`,
         `Agreement Balance: ${agreement.outstandingBalance}`,
       ].join("\n"),
+      attachments: receipt.pdfPath
+        ? [
+            {
+              filename: `${receipt.receiptNumber}.pdf`,
+              path: path.resolve(__dirname, "../../", receipt.pdfPath),
+            },
+          ]
+        : [],
     });
 
     receipt.status = "sent-to-admin";

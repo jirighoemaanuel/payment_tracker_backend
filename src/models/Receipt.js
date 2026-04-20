@@ -31,6 +31,10 @@ const receiptSchema = new mongoose.Schema(
       type: Date,
       default: Date.now,
     },
+    pdfPath: {
+      type: String,
+      default: "",
+    },
     status: {
       type: String,
       enum: ["pending-admin-email", "sent-to-admin", "failed"],

@@ -14,9 +14,9 @@ const tenantSchema = new mongoose.Schema(
     },
     email: {
       type: String,
-      required: [true, "Tenant email is required"],
       trim: true,
       lowercase: true,
+      default: "",
     },
     alternateName: {
       type: String,
