@@ -28,6 +28,52 @@ const createTransporter = () => {
   });
 };
 
+const verifyEmailSetup = async () => {
+  const hasAdminEmail = Boolean(process.env.ADMIN_EMAIL);
+  const hasSmtpConfig = Boolean(
+    process.env.SMTP_HOST &&
+      process.env.SMTP_PORT &&
+      process.env.SMTP_USER &&
+      process.env.SMTP_PASS
+  );
+
+  if (!hasAdminEmail) {
+    console.log("Email setup: ADMIN_EMAIL is missing, so receipt emails will be skipped.");
+    return {
+      ready: false,
+      mode: "missing-admin-email",
+    };
+  }
+
+  if (!hasSmtpConfig) {
+    console.log(
+      "Email setup: SMTP credentials are incomplete. The app will use local JSON transport and will not send real emails."
+    );
+    return {
+      ready: false,
+      mode: "json-transport",
+    };
+  }
+
+  const transporter = createTransporter();
+
+  try {
+    await transporter.verify();
+    console.log(`Email setup: SMTP connection verified for ${process.env.SMTP_USER}.`);
+    return {
+      ready: true,
+      mode: "smtp",
+    };
+  } catch (error) {
+    console.error(`Email setup: SMTP verification failed - ${error.message}`);
+    return {
+      ready: false,
+      mode: "smtp-error",
+      error,
+    };
+  }
+};
+
 const sendReceiptToAdmin = async ({ receipt, agreement, payment }) => {
   const adminEmail = process.env.ADMIN_EMAIL;
 
@@ -75,3 +121,4 @@ const sendReceiptToAdmin = async ({ receipt, agreement, payment }) => {
 };
 
 export default sendReceiptToAdmin;
+export { verifyEmailSetup };
